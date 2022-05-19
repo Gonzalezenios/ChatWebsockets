@@ -1,4 +1,4 @@
-let socket = io.connect();
+const socket = io.connect();
 
 // TODO al recibir los productos, agregarlos al HTML usando antes la funcion data2TableJS(productos);
 socket.on('productos', function (productos) {
@@ -29,11 +29,11 @@ form.addEventListener('submit', e => {
             socket.emit('update', 'ok');
         })
         .catch(error => console.error(error))
-})
+});
 
 
 function data2TableJS(productos) {
-    let res = ''
+    const res = ''
     if (productos.length) {
         res += `
         <style>
@@ -57,7 +57,7 @@ function data2TableJS(productos) {
         </div>`
     }
     return res
-}
+};
 
 function data2TableHBS(productos, cb) {
 
@@ -74,14 +74,14 @@ function data2TableHBS(productos, cb) {
 
             cb(html)
         })
-}
+};
 
 socket.on('messages', function (data) {
     console.log(data);
 });
 
 function render(data) {
-    var html = data.map(function (elem, index) {
+    const html = data.map(function (elem, index) {
         return (
             `<div>
             <strong>${elem.author}</strong>:
@@ -90,14 +90,14 @@ function render(data) {
         )
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
-}
+};
 socket.on('messages', function (data) { render(data); });
 
 function addMessage(e) {
-    var mensaje = {
+    const mensaje = {
         author: document.getElementById('username').value,
         text: document.getElementById('texto').value
     };
     socket.emit('new-message', mensaje);
     return false;
-}
+};

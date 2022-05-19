@@ -14,7 +14,7 @@ let items = new Productos();
 // establecemos la configuración de handlebars
 app.engine(
     "hbs",
-    handlebars({
+    handlebars.engine({
         extname: ".hbs",
         defaultLayout: 'vista.hbs',
     })
@@ -33,7 +33,6 @@ app.use('/api', router);
 
 /* -------------------- HTTP endpoints ---------------------- */
 
-// TODO completar con lo realizado en entregas anteriores
 router.get('/productos/listar', (req, res) => {
     const productos = items.listarAll();
     if (productos.length > 0) {
@@ -107,7 +106,7 @@ io.on('connection', socket => {
 
 });
 
-let messages = [];
+const messages = [];
 
 io.on('connection', function (socket) {
     console.log('Un cliente se ha conectado');
@@ -126,7 +125,7 @@ io.on('connection', function (socket) {
 
 /* ------------------------------------------------------- */
 
-const PORT = 8000;
+const PORT = 8080;
 
 const srv = server.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);

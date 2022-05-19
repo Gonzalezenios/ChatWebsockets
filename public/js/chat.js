@@ -1,4 +1,5 @@
 const fs = require('fs');
+
 socket.on('messages', function (data) {
     console.log(data);
     render(data);
@@ -15,7 +16,7 @@ function render(data) {
         `)
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
-}
+};
 
 const userCentroMensajes = document.getElementById('username')
 const textoCentroMensajes = document.getElementById('texto')
@@ -34,16 +35,16 @@ function addMessage(e) {
     botonCentroMensajes.disabled = true
 
     return false;
-}
+};
 
 userCentroMensajes.addEventListener('input', () => {
     let hayEmail = userCentroMensajes.value.length
     let hayTexto = textoCentroMensajes.value.length
     textoCentroMensajes.disabled = !hayEmail
     botonCentroMensajes.disabled = !hayEmail || !hayTexto
-})
+});
 
 textoCentroMensajes.addEventListener('input', () => {
     let hayTexto = textoCentroMensajes.value.length
     botonCentroMensajes.disabled = !hayTexto
-})
+});
